@@ -1,7 +1,5 @@
-import React from 'react';
-import logo from './logo.svg';
 import Search from './components/atoms/searchInput/Search';
-import CardSong from './components/cardSong/CardSong';
+import CardSong from './components/cardSong';
 import './App.css';
 
 function App() {
