@@ -2,10 +2,16 @@ import React, { useState } from 'react';
 import CardSong from '../../cardSong';
 import SearchIcon from '@mui/icons-material/Search';
 import IconButton from '@mui/material/IconButton/IconButton';
-import { Input } from '@mui/material';
-
+import InputBase from '@mui/material/InputBase';
+//estilos para el propis para el componente InpuBase
+const style = {
+    background: 'linear-gradient(45deg, #f2f2f2 30%, #f2f2f2 90%)',
+    borderRadius: 25,
+    color: 'black'
+};
 
 const Search = () => {
+
     const [searchTerm, setSearchTerm] = useState('');
     const [showCards, setShowCards] = useState(false);
 
@@ -15,23 +21,22 @@ const Search = () => {
     };
     return (
         <div>
-            <div>
+            <div >
                 <h2>Search Song</h2>
-                <Input 
-                    
+                <InputBase
+                    style={style}
+                    sx={{ ml: 1, flex: 1 }}
                     placeholder="Search Song"
                     value={searchTerm}
-                    onChange={(e) => {setSearchTerm(e.target.value); handleSearch()}}
+                    onChange={(e) => { setSearchTerm(e.target.value); handleSearch() }}
                     startAdornment={
-                        <IconButton color="primary" aria-label="upload picture" component="span" onClick={handleSearch}>
+                        <IconButton color="default" aria-label="upload picture" component="span" onClick={handleSearch}>
                             <SearchIcon />
-                        </IconButton>
-                    }
+                        </IconButton>}
                 />
             </div>
             <div>
-                {/* Renderizar CardSong solo si showCards es true */}
-                {showCards && <CardSong searchTerm={searchTerm.length >3 ? searchTerm : '' } />}
+                {showCards && <CardSong searchTerm={searchTerm.length > 3 ? searchTerm : ''} />}
             </div>
         </div>
     );
