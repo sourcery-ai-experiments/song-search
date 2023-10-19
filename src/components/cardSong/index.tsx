@@ -1,43 +1,43 @@
 /* eslint-disable jsx-a11y/alt-text */
 import React, { useState, useEffect } from "react";
-import {dataUpload} from "../../services/requetsToEndpoint";
+import { dataUpload } from "../../services/requetsToEndpoint";
 import Track from "../../models/track.inteface";
 
-//creamos una variable y le asignamos datos de resquestToEndpoint 
+// Creamos una prop para pasar el término de búsqueda
+interface CardSongProps {
+    searchTerm: string;
+}
 
+const CardSong = ({ searchTerm }: CardSongProps) => {
+    const [songData, setSongData] = useState<Track[]>([]);
 
-const CardSong = () => {
-    //usamos useState para cambiar el estado de los datos que queremos obtener
-    const [songData, setSongData] = useState<Track>();
-    
-    //usamos useEffect para realizar solicitud a fecth
     useEffect(() => {
         const fetchData = async () => {
-            const data  = await dataUpload();
-            console.log(data);
-            setSongData({
-                nameArtist: data?.nameArtist,
-                nameSong: data?.nameSong,
-                imageSong: data?.imageSong,
-            });
+            const data = await dataUpload(searchTerm);
+            setSongData(data);
         };
         fetchData();
-    }, []);
+    }, [searchTerm]);
 
-    //componente que pinta con los datos obtenidos del useState y useEffect
     const CardSongSearch = () => {
-        
-        //si songData es null o undefine vamos a crear un objeto vacio de tipo Track
-        const { nameArtist, nameSong, imageSong }: Track = songData || {} as Track;
         return (
             <div>
-                <h3>{nameArtist}</h3>
-                <img src={imageSong} />
-                <h2>{nameSong}</h2>
+                {songData.length > 0 ? (
+                    songData.map((track, index) => (
+                        <div key={index}>
+                            <h3>{track.nameArtist}</h3>
+                            <img src={track.imageSong} alt={track.nameSong} />
+                            <h2>{track.nameSong}</h2>
+                        </div>
+                    ))
+                ) : (
+                    <div></div>
+                )}
             </div>
-        )
-    }
-    return <CardSongSearch />
+        );
+    };
+
+    return <CardSongSearch />;
 };
 
 export default CardSong;
