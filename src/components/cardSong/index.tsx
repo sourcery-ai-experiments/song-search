@@ -5,7 +5,7 @@ import Card from '@mui/material/Card';
 import CardMedia from '@mui/material/CardMedia';
 import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
-import CardSongProps from "./cardSong.interface";
+import CardSongProps from "./cardSongProps.interface";
 
 const CardSong = ({ searchTerm }: CardSongProps) => {
     const [songData, setSongData] = useState<Track[]>([]);
