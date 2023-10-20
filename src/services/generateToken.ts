@@ -4,8 +4,8 @@ const generateToken = async () => {
         // POST request using fetch with set headers
         const urlencoded = new URLSearchParams();
         urlencoded.append("grant_type", "client_credentials");
-        urlencoded.append("client_id", "d65bb2879c7e4c2885d3e192a4ad92a4");
-        urlencoded.append("client_secret", "87f2e0b1b7b44f7a91cb3b0679ec6277");
+        urlencoded.append("client_id", process.env.REACT_APP_CLIENT_ID || '' );
+        urlencoded.append("client_secret", process.env.REACT_APP_CLIENT_SECRET || '');
         const requestOptions = {
             method: 'POST',
             headers: {

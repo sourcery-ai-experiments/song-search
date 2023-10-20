@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { dataUpload } from "../../services/requetsToEndpoint";
+import { getListSong } from "../../services/requetsToEndpoint";
 import Track from "../../models/track.inteface";
 import Card from '@mui/material/Card';
 import CardMedia from '@mui/material/CardMedia';
@@ -12,7 +12,7 @@ const CardSong = ({ searchTerm }: CardSongProps) => {
 
     useEffect(() => {
         const fetchData = async () => {
-            const data = await dataUpload(searchTerm);
+            const data = await getListSong(searchTerm);
             setSongData(data);
         };
         fetchData();
@@ -23,7 +23,7 @@ const CardSong = ({ searchTerm }: CardSongProps) => {
             <>
                 <div style={{display:'inline-block', 
                 marginTop: '20px'}}>
-                    {songData.length > 0 ? (
+                    {songData.length > 0 && (
                         songData.map((track, index) => (
                             <div key={index}>
                                 <Card sx={{ maxWidth: 345 }}>
@@ -44,8 +44,6 @@ const CardSong = ({ searchTerm }: CardSongProps) => {
                                 <br />
                             </div>
                         ))
-                    ) : (
-                        <div></div>
                     )}
                 </div>
             </>

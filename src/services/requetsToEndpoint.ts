@@ -1,10 +1,10 @@
 import { getToken } from "./generateToken";
 import Track from "../models/track.inteface";
 
-const dataUpload = async (searchTerm?: string) => {
+const getListSong = async (searchTerm?: string): Promise<Track[]> =>  {
   const songList: Track[] = [];
   //we create a variable and to asigned the value of the getToken fuction
-  const result = await getToken();
+  const token = await getToken();
   
     if (searchTerm && searchTerm.length > 3) {
       try {
@@ -13,7 +13,7 @@ const dataUpload = async (searchTerm?: string) => {
           `https://api.spotify.com/v1/search?type=track&q=${searchTerm}&limit=10`,
           {
             headers: {
-              Authorization: "Bearer " + `${result}`,
+              Authorization: "Bearer " + `${token}`,
             },
           }
         );
@@ -35,4 +35,4 @@ const dataUpload = async (searchTerm?: string) => {
   
   return songList;
 };
-export { dataUpload };
+export { getListSong };

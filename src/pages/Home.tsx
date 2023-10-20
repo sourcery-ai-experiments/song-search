@@ -1,6 +1,6 @@
 // Home.js
 import React, { useState } from 'react';
-import Search from '../components/atoms/Search';
+import Search from '../components/atoms/search';
 import CardSong from '../components/cardSong';
 
 const Home = () => {
