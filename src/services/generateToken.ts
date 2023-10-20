@@ -17,16 +17,15 @@ const generateToken = async () => {
         const responseData = await data.json();
         return responseData;
     } catch (error) {
-        console.log(error);
         return;
     }
 }
 
 const getToken = async () => {
-    // obtenemos el token almacenado en localStorage
+    // here we obtain the stored token on localStorage
     const localStorageToken = localStorage.getItem('token');
 
-    //verificamos si el token existe y si aun es valido
+    //we verify if the token exists and if it is valid
     if (localStorageToken) {
         const newObjectToken = JSON.parse(localStorageToken);
         if (Date.now() < newObjectToken.tokenExpiryDate) {
@@ -34,12 +33,12 @@ const getToken = async () => {
         }
     }
 
-    // Generar un nuevo token y calculamos la fecha de expiracion
+    // here we generate a new token and calculate the expiration date
     const token = await generateToken();
     const tokenExpiryDate = Date.now() + token.expires_in * 60;
 
 
-    // creamos un nuevo objeto y guardamos el token y el tokenExpiryDate y la asignamos localStorage
+    // we created a object new and save of token and also tokenExpiryDate and asigned on localstorage 
     const newToken = {
         access_token: token.access_token,
         tokenExpiryDate: tokenExpiryDate

@@ -1,11 +1,11 @@
-import Search from './components/atoms/searchInput/Search';
+import Home from './pages/Home';
 
 import './App.css';
 
 function App() {
   return (
     <div className="App">
-      <Search/>
+      <Home/>
     </div>
   );
 }

@@ -1,4 +1,3 @@
-/* eslint-disable jsx-a11y/alt-text */
 import React, { useState, useEffect } from "react";
 import { dataUpload } from "../../services/requetsToEndpoint";
 import Track from "../../models/track.inteface";
@@ -6,11 +5,7 @@ import Card from '@mui/material/Card';
 import CardMedia from '@mui/material/CardMedia';
 import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
-
-// Creamos una prop para pasar el término de búsqueda
-interface CardSongProps {
-    searchTerm: string;
-}
+import CardSongProps from "./cardSong.interface";
 
 const CardSong = ({ searchTerm }: CardSongProps) => {
     const [songData, setSongData] = useState<Track[]>([]);

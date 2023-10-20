@@ -2,15 +2,13 @@ import { getToken } from "./generateToken";
 import Track from "../models/track.inteface";
 
 const dataUpload = async (searchTerm?: string) => {
-  //console.log(searchTerm)
   const songList: Track[] = [];
-  //creamos una variable y le asignamos el valor de la funcion getToken
+  //we create a variable and to asigned the value of the getToken fuction
   const result = await getToken();
-  console.log(searchTerm);
   
     if (searchTerm && searchTerm.length > 3) {
       try {
-        //aqui realizamos la conexion de la api y tambien realizamos la peticion del endpoint
+        //here connets de API and also we does petition of the endpoint
         const response = await fetch(
           `https://api.spotify.com/v1/search?type=track&q=${searchTerm}&limit=10`,
           {
@@ -28,9 +26,7 @@ const dataUpload = async (searchTerm?: string) => {
           });
         });
       } catch (error) {
-        // Aquí puedes manejar los errores de la solicitud
         console.error("Error fetching data:", error);
-        console.log("verificar el token");
       }
     }
     else {

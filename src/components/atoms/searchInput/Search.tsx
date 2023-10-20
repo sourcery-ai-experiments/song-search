@@ -1,42 +1,39 @@
 import React, { useState } from 'react';
-import CardSong from '../../cardSong';
 import SearchIcon from '@mui/icons-material/Search';
 import IconButton from '@mui/material/IconButton/IconButton';
 import InputBase from '@mui/material/InputBase';
-//estilos para el propis para el componente InpuBase
+
 const style = {
     background: 'linear-gradient(45deg, #f2f2f2 30%, #f2f2f2 90%)',
     borderRadius: 25,
     color: 'black'
 };
 
-const Search = () => {
-
+const Search = ({ onSearch }: { onSearch: (term: string) => void }) => {
     const [searchTerm, setSearchTerm] = useState('');
-    const [showCards, setShowCards] = useState(false);
 
-    const handleSearch = () => {
-        // Cambiar el estado para mostrar las tarjetas
-        setShowCards(true);
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const value = e.target.value;
+        setSearchTerm(value);
+        onSearch(value); // Aquí utilizamos onSearch
     };
+
     return (
         <div>
-            <div >
+            <div>
                 <h2>Search Song</h2>
                 <InputBase
                     style={style}
                     sx={{ ml: 1, flex: 1 }}
                     placeholder="Search Song"
                     value={searchTerm}
-                    onChange={(e) => { setSearchTerm(e.target.value); handleSearch() }}
+                    onChange={handleChange}
                     startAdornment={
-                        <IconButton color="default" aria-label="upload picture" component="span" onClick={handleSearch}>
+                        <IconButton color="default" aria-label="upload picture" component="span">
                             <SearchIcon />
-                        </IconButton>}
+                        </IconButton>
+                    }
                 />
-            </div>
-            <div>
-                {showCards && <CardSong searchTerm={searchTerm.length > 3 ? searchTerm : ''} />}
             </div>
         </div>
     );
