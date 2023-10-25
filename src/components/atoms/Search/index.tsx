@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import SearchIcon from '@mui/icons-material/Search';
 import IconButton from '@mui/material/IconButton/IconButton';
 import InputBase from '@mui/material/InputBase';
+import SearchProps from './interface';
 
 const style = {
     background: 'linear-gradient(45deg, #f2f2f2 30%, #f2f2f2 90%)',
@@ -9,18 +10,18 @@ const style = {
     color: 'black'
 };
 
-const Search = ({ onSearch }: { onSearch: (term: string) => void }) => {
+const Search = ({ onSearch }:SearchProps) => {
     const [searchTerm, setSearchTerm] = useState('');
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const value = e.target.value;
         setSearchTerm(value);
-        onSearch(value); // Aquí utilizamos onSearch
+        onSearch(value);
     };
 
     return (
         <div>
-            <div>
+            <div style={{textAlign:'center'}}>
                 <h2>Search Song</h2>
                 <InputBase
                     style={style}

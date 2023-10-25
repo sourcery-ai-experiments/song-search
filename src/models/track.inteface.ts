@@ -1,6 +1,7 @@
 interface Track {
-    nameArtist: string,
-    nameSong: string,
-    imageSong: string
+    id:string,
+    artist: string,
+    name: string,
+    imageUrl: string
 }
 export default Track;

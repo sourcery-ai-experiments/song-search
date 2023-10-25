@@ -1,5 +1,6 @@
 import { getToken } from "./generateToken";
 import Track from "../models/track.inteface";
+import { fecthApiData } from "./requestApiData";
 
 const getListSong = async (searchTerm?: string): Promise<Track[]> =>  {
   const songList: Track[] = [];
@@ -9,20 +10,13 @@ const getListSong = async (searchTerm?: string): Promise<Track[]> =>  {
     if (searchTerm && searchTerm.length > 3) {
       try {
         //here connets de API and also we does petition of the endpoint
-        const response = await fetch(
-          `https://api.spotify.com/v1/search?type=track&q=${searchTerm}&limit=10`,
-          {
-            headers: {
-              Authorization: "Bearer " + `${token}`,
-            },
-          }
-        );
-        const data = await response.json();
-        data.tracks.items.map((item: { name: any; album: { images: { url: any; }[]; }; artists: { name: any; }[]; }) => {
+        const data =await fecthApiData(searchTerm, token);
+        data.tracks.items.map((item: { id:any; name: any; album: { images: { url: any; }[]; }; artists: { name: any; }[]; }) => {
           songList.push({
-            imageSong: item.album.images[1].url,
-            nameSong: item.name,
-            nameArtist: item.artists[0].name,
+            id:item.id,
+            imageUrl: item.album.images[1].url,
+            name: item.name,
+            artist: item.artists[0].name,
           });
         });
       } catch (error) {
@@ -32,7 +26,6 @@ const getListSong = async (searchTerm?: string): Promise<Track[]> =>  {
     else {
       return songList;
     }
-  
   return songList;
 };
 export { getListSong };
