@@ -30,14 +30,14 @@ const CardSong = ({ searchTerm }: CardSongProps) => {
                                     <CardMedia
                                         component="img"
                                         height="300"
-                                        src={track.imageSong} alt={track.nameSong}
+                                        src={track.imageUrl} alt={track.imageUrl}
                                     />
                                     <CardContent>
                                         <Typography variant="h5" color="black">
-                                            {track.nameArtist}
+                                            {track.artist}
                                         </Typography>
                                         <Typography variant="h6" color="black">
-                                            {track.nameSong}
+                                            {track.name}
                                         </Typography>
                                     </CardContent>
                                 </Card>
