@@ -1,6 +1,6 @@
 import Song from "../../../models/song.interface";
 
 interface CardSongDetailsProps {
-    songs: Song[]
+    songDetail: Song;
 }
 export default CardSongDetailsProps;
