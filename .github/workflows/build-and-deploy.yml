@@ -40,5 +40,6 @@ jobs:
       - name: Deploy
         uses: w9jds/firebase-action@master
         with:
-          run: cd deploy
+          run: | 
+            cd deploy
           args: deploy --only hosting --project search-song-api-spotify          
