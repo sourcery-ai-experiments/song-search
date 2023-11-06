@@ -55,7 +55,8 @@ const Home = () => {
           flexDirection: "column",
           alignItems: "center",
         }}
-      >
+      > 
+        <p>test</p>
         <SearchInput onSearch={handleSearch} />
         <CardSongSearch tracksData={songsData} onClickSong={goUrlSongSpotify} />
       </div>
