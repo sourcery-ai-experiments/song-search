@@ -10,6 +10,7 @@ on:
     branches: [ "master" ] 
     
 env:
+  FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
   REACT_APP_SPOTIFY_CLIENT_SECRET: ${{ secrets.REACT_APP_SPOTIFY_CLIENT_SECRET }}
   REACT_APP_SPOTIFY_CLIENT_ID: ${{ secrets.REACT_APP_SPOTIFY_CLIENT_ID }}
 jobs:
@@ -41,6 +42,4 @@ jobs:
         with: 
           run: |
             cd deploy
-            firebase deploy --only hosting --project search-song-api-spotify
-        env:
-          FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
+            firebase deploy --only hosting --project search-song-api-spotify          
