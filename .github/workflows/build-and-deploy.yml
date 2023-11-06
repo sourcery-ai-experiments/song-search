@@ -39,6 +39,7 @@ jobs:
       - name: Deploy
         uses: w9jds/firebase-action@master
         with:
-          args: ./deploy --only hosting --project search-song-api-spotify
+          run : cd deploy
+          args: deploy --only hosting --project search-song-api-spotify
         env:
           FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
