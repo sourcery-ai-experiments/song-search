@@ -1,4 +1,4 @@
-import Track from "../../../models/track.inteface";
+import Track from "../../../models/track.interface";
 interface CardSongSearchProps {
     tracksData: Track[];
     onClickSong: (id: string) => void;

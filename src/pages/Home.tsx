@@ -1,43 +1,66 @@
-// Home.js
-import React, { useState, useEffect } from "react";
-import Search from '../components/atoms/search';
-import CardSongSearch from '../components/atoms/cardSong';
-import Track from '../models/track.inteface';
-import { getListSong } from '../services/requetsToEndpoint';
-import { useNavigate } from 'react-router-dom';
+import { useState, useEffect } from "react";
+import { useTranslation } from "react-i18next";
+import { SelectChangeEvent } from "@mui/material/Select";
+import { useNavigate } from "react-router-dom";
 
+import Track from "../models/track.interface";
+
+import { getListSong } from "../services/requetsToEndpoint";
+import { useLazySearchTracksQuery } from "../services/api";
+import SelectLanguage from "../components/molecules/selectLanguage";
+import { SearchInput, CardSongSearch } from "../components/atoms";
 
 const Home = () => {
-    const [searchTerm, setSearchTerm] = useState<string>('');
-    const handleSearch = (nameSong: string) => {
-        setSearchTerm(nameSong);
-    };
+  const [searchTerm, setSearchTerm] = useState<string>("");
+  const [songsData, setSongsData] = useState<Track[]>([]);
+  const [trigger, { data }] = useLazySearchTracksQuery();
 
-    const [songData, setSongData] = useState<Track[]>([]);
-    useEffect(() => {
-        const fetchData = async () => {
-            try {
-                const data = await getListSong(searchTerm);
-                setSongData(data);
-            } catch (error) {
-                console.log(error);
-            }
-        };
-        fetchData();
-    }, [searchTerm]);
+  const navigate = useNavigate();
+  const { i18n } = useTranslation();
 
-    const navigate = useNavigate();
+  useEffect(() => {
+    if (data) {
+      const dataSong = getListSong(data);
+      setSongsData(dataSong);
+    }
+  }, [searchTerm, data]);
 
-    const goUrlSongSpotify = (Id: string) => {
-        navigate(`/details/${Id}`);
-    };
+  const goUrlSongSpotify = (id: string) => {
+    navigate(`/details/${id}`);
+  };
 
-    return (
-        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', }}>
-            <Search onSearch={handleSearch} />
-            <CardSongSearch tracksData={songData} onClickSong={goUrlSongSpotify} />
-        </div>
-    );
-}
+  const changeLanguage = (e: SelectChangeEvent<string>) => {
+    const selectedLanguage = e.target.value;
+    i18n.changeLanguage(selectedLanguage);
+  };
+
+  const handleSearch = (nameSong: string) => {
+    if (nameSong && nameSong.length > 3) {
+      setSearchTerm(nameSong);
+      trigger(nameSong);
+    } else {
+      setSearchTerm("");
+      setSongsData([]);
+    }
+  };
+  return (
+    <>
+      <SelectLanguage
+        language={i18n.language}
+        changeLanguage={changeLanguage}
+      />
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+        }}
+      >
+        <SearchInput onSearch={handleSearch} />
+        <CardSongSearch tracksData={songsData} onClickSong={goUrlSongSpotify} />
+      </div>
+    </>
+  );
+};
 
 export default Home;
