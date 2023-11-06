@@ -28,9 +28,14 @@ jobs:
         cache: 'npm'
     - run: yarn
     - run: yarn build
-    - name: Deploy
-      uses: w9jds/firebase-action@master
-      with:
-        args: deploy --only hosting --project search-song-api-spotify
-      env:
-        FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
+  deploy:
+    runs-on: ubuntu-latest
+    needs: build
+    if: github.event_name == 'pull_request' && github.ref == 'refs/heads/master'
+    steps:
+      - name: Deploy
+        uses: w9jds/firebase-action@master
+        with:
+          args: deploy --only hosting --project search-song-api-spotify
+        env:
+          FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
