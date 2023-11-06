@@ -31,6 +31,8 @@ jobs:
           cache: "npm"
       - run: yarn
       - run: yarn build
+      - name: Verificar contenido del directorio de construcción
+        run: ls -l build
   deploy:
     if: ${{ github.ref == 'refs/heads/master' }}
     needs: build
