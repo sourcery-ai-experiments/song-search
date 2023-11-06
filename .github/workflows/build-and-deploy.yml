@@ -33,13 +33,12 @@ jobs:
     - run: yarn
     - run: yarn build
   deploy:
-    runs-on: ubuntu-latest
     needs: build
+    runs-on: ubuntu-latest
     if: github.ref == 'refs/heads/master'
     steps:
       - name: Deploy
         uses: w9jds/firebase-action@master
         with:
-          run: | 
-            cd deploy
-          args: deploy --only hosting --project search-song-api-spotify          
+          run: ./deploy
+          args: deploy --only hosting --project search-song-api-spotify
