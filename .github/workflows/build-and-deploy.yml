@@ -6,7 +6,9 @@ name: Node.js CI
 on:
   pull_request:
     branches: [ "master" ]
-
+env:
+  REACT_APP_SPOTIFY_CLIENT_SECRET: ${{ secrets.REACT_APP_SPOTIFY_CLIENT_SECRET }}
+  REACT_APP_SPOTIFY_CLIENT_ID: ${{ secrets.REACT_APP_SPOTIFY_CLIENT_ID }}
 jobs:
   build:
 
@@ -24,6 +26,11 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
-    - run: yarn install
-    - run: yarn run build --if-present
-    - run: firebase deploy
+    - run: yarn
+    - run: yarn build
+    - name: Deploy
+      uses: w9jds/firebase-action@master
+      with:
+        args: deploy --only hosting --project search-song-api-spotify
+      env:
+        FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}

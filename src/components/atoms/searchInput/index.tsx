@@ -11,7 +11,7 @@ const style = {
   color: "black",
 };
 
-const Search = ({ onSearch }: SearchProps) => {
+const SearchInput = ({ onSearch }: SearchProps) => {
   const { t } = useTranslation();
 
   const [searchTerm, setSearchTerm] = useState("");
@@ -20,7 +20,6 @@ const Search = ({ onSearch }: SearchProps) => {
     setSearchTerm(value);
     onSearch(value);
   };
-
 
   return (
     <div>
@@ -33,7 +32,11 @@ const Search = ({ onSearch }: SearchProps) => {
           value={searchTerm}
           onChange={handleChange}
           startAdornment={
-            <IconButton color="default" aria-label="upload picture" component="span">
+            <IconButton
+              color="default"
+              aria-label="upload picture"
+              component="span"
+            >
               <SearchIcon />
             </IconButton>
           }
@@ -43,4 +46,4 @@ const Search = ({ onSearch }: SearchProps) => {
   );
 };
 
-export default Search;
+export default SearchInput;

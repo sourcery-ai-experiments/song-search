@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { getListSong } from "../../services/requetsToEndpoint";
-import Track from "../../models/track.inteface";
+import Track from "../../models/track.interface";
 import Card from '@mui/material/Card';
 import CardMedia from '@mui/material/CardMedia';
 import CardContent from '@mui/material/CardContent';

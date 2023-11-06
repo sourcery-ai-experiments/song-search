@@ -1,13 +1,14 @@
-import React, { useState, useEffect } from "react";
-import Search from "../components/atoms/search";
-import CardSongSearch from "../components/atoms/cardSong";
-import Track from "../models/track.inteface";
-import { getListSong } from "../services/requetsToEndpoint";
-import { useNavigate } from "react-router-dom";
-import { useLazySearchTracksQuery } from "../services/api";
+import { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { SelectChangeEvent } from "@mui/material/Select";
+import { useNavigate } from "react-router-dom";
+
+import Track from "../models/track.interface";
+
+import { getListSong } from "../services/requetsToEndpoint";
+import { useLazySearchTracksQuery } from "../services/api";
 import SelectLanguage from "../components/molecules/selectLanguage";
+import { SearchInput, CardSongSearch } from "../components/atoms";
 
 const Home = () => {
   const [searchTerm, setSearchTerm] = useState<string>("");
@@ -44,11 +45,20 @@ const Home = () => {
   };
   return (
     <>
-    <SelectLanguage language={i18n.language} changeLanguage={changeLanguage}/>
-    <div style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
-      <Search onSearch={handleSearch} />
-      <CardSongSearch tracksData={songsData} onClickSong={goUrlSongSpotify} />
-    </div>
+      <SelectLanguage
+        language={i18n.language}
+        changeLanguage={changeLanguage}
+      />
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+        }}
+      >
+        <SearchInput onSearch={handleSearch} />
+        <CardSongSearch tracksData={songsData} onClickSong={goUrlSongSpotify} />
+      </div>
     </>
   );
 };

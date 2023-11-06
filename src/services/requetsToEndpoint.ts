@@ -1,4 +1,4 @@
-import Track from "../models/track.inteface";
+import Track from "../models/track.interface";
 
 const getListSong = (dataSong: any): Track[] => {
 
@@ -12,7 +12,7 @@ const getListSong = (dataSong: any): Track[] => {
           name: item.name,
           artist: item.artists[0].name,
         });
-      });
+        return dataSong;});
     } catch (error) {
       return songList;
     }
