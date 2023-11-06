@@ -42,4 +42,4 @@ jobs:
         with: 
           run: |
             cd deploy
-            firebase deploy --only hosting --project search-song-api-spotify          
+            args: deploy --only hosting --project search-song-api-spotify          
