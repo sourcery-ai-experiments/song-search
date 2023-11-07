@@ -35,6 +35,12 @@ jobs:
       - name: Build
         run: yarn build
 
+      - name: Persist Build Artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: build-artifact
+          path: build
+
   deploy:
     runs-on: ubuntu-latest
     needs: build
@@ -49,6 +55,12 @@ jobs:
           node-version: 16
           cache: "npm"
 
+      - name: Download Build Artifact
+        uses: actions/download-artifact@v2
+        with:
+          name: build-artifact
+          path: build
+          
       - name: Deploy
         uses: w9jds/firebase-action@master
         with:
