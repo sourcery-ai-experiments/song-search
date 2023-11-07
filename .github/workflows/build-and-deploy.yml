@@ -42,7 +42,7 @@ jobs:
         run: ls -l
 
       - name: Navegar al directorio del proyecto
-        run: cd $GITHUB_WORKSPACE/song-search
+        run: cd $GITHUB_WORKSPACE
 
       - name: Verificar contenido del directorio actual después de la navegación
         run: ls -l
