@@ -31,21 +31,6 @@ jobs:
           cache: "npm"
       - run: yarn
       - run: yarn build
-      - name: Verificar contenido del directorio de construcción
-        run: ls -l build
-  deploy:
-    if: ${{ github.ref == 'refs/heads/master' }}
-    needs: build
-    runs-on: ubuntu-latest
-    steps:
-      - name: Verificar contenido del directorio actual antes del despliegue
-        run: ls -l
-
-      - name: Navegar al directorio del proyecto
-        run: cd $GITHUB_WORKSPACE
-
-      - name: Verificar contenido del directorio actual después de la navegación
-        run: ls -l
 
       - name: Deploy
         uses: w9jds/firebase-action@master
