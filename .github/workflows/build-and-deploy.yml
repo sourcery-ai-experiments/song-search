@@ -48,6 +48,8 @@ jobs:
         with:
           node-version: 16
           cache: "npm"
-
+      - name: Ajustar PATH para Firebase Tools
+        run: echo 'export PATH=$PATH:~/.npm-global/bin' >> $GITHUB_ENV
+        
       - name: Deploy to Firebase
         run: firebase deploy --only hosting --project search-song-api-spotify
