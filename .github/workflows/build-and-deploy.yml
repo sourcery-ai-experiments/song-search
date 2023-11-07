@@ -38,9 +38,12 @@ jobs:
     needs: build
     runs-on: ubuntu-latest
     steps:
+      - name: Navegar al directorio del proyecto
+        run: cd song-search
+        
       - name: Verificar directorio actual antes del despliegue
         run: pwd
-        
+
       - name: Deploy
         uses: w9jds/firebase-action@master
         with:
